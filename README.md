@@ -1,1 +1,1 @@
-# wordpress-inactive-users-auto-delete
+# Inactive Users Auto-Delete
