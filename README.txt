@@ -1,23 +1,24 @@
-=== Inactive Users Auto-Delete ===
+=== SiteRig Toolbox ===
 Contributors: mattstone
-Tags: users, deletion, inactive, admin
+Tags: users, deletion, inactive, admin, utility
 Requires at least: 4.0.0
 Tested up to: 6.0.1
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Identify when your users last logged in and set an expiry period for unused accounts that automatically get deleted.
+Useful utility tools to manage and enhance your WordPress site.
 
 == Description ==
 
+The SiteRig Toolbox is a collection of utilities that helps you manage and enhance your WordPress site.
 
+- Inactive Users Auto-Delete - Identify when your users last logged in and set an expiry period for unused accounts that automatically get deleted.
 
 == Installation ==
 
-1. Upload `siterig-inactive-users-auto-delete.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Upload `siterig-toolbox` to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
 

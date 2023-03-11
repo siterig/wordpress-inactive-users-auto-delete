@@ -1,7 +1,7 @@
 <?php
 namespace SiteRig;
 
-class InactiveUsers extends Core
+class Toolbox extends Core
 {
 
     public $inactivity_duration;
@@ -166,8 +166,8 @@ class InactiveUsers extends Core
         $select = '
             <select name="user_state_%s" style="float:none;margin-left:10px;">
                 <option>Last login...</option>
-                <option value="active">In the last ' . $this->inactivity_duration_human . '</option>
-                <option value="inactive">More than ' . $this->inactivity_duration_human . ' ago</option>
+                <option value="active">Within ' . $this->inactivity_duration_human . '</option>
+                <option value="inactive">Over ' . $this->inactivity_duration_human . ' ago</option>
             </select>
         ';
 
@@ -193,10 +193,12 @@ class InactiveUsers extends Core
         // get all users who haven't logged in for more than a day
         $inactive_users_query = $wpdb->get_results(
             "
-                SELECT user_id
-                FROM $wpdb->usermeta
-                WHERE meta_key = 'session_tokens'
-                AND SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(meta_value, 'login', -1), ';', 2), ':', -1) < " . $inactivity_timestamp
+                SELECT u.user_id, SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(m.meta_value, 'login', -1), ';', 2), ':', -1) AS last_login
+                FROM $wpdb->users AS u
+                LEFT JOIN $wpdb->usermeta AS m
+                ON u.ID = m.user_id
+                WHERE (m.meta_key = 'session_tokens'
+                AND SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(m.meta_value, 'login', -1), ';', 2), ':', -1) < " . $inactivity_timestamp . ")"
         );
         
         // Check if there were any inactive users
